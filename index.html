@@ -1,5 +1,38 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="蹦蹦的家" type="application/atom+xml"><link rel="icon" href="/favicon.ico"><title>蹦蹦的家</title><link rel="stylesheet" href="/css/style.css" type="text/css">
-<!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="site-head"><div class="inner"><h1 class="site-title u-fl"><a href="/">蹦蹦的家</a></h1><nav class="site-nav u-fr"><ul class="site-nav__list"><li class="site-nav__item"><a href="/" class="site-nav__link">Home</a></li><li class="site-nav__item"><a href="/archives" class="site-nav__link">Archives</a></li></ul></nav></div></header><section class="site-content"><main class="site-main"><article class="post"><header class="post__head"><time datetime="2014-11-23T11:22:19.000Z" class="post__time">十一月 23, 2014</time><h1 class="post__title"><a href="/2014/11/23/设计模式之工厂方法模式/">设计模式之工厂方法模式</a></h1></header><div class="post__main"></div><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a href="/tags/设计模式/" class="post__tag__link">设计模式</a></li><li class="post__tag__item"><a href="/tags/工厂/" class="post__tag__link">工厂</a></li></ul><a href="/2014/11/23/设计模式之工厂方法模式/#comments" class="post__foot-link u-fr">评论</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-11-23T03:46:01.000Z" class="post__time">十一月 23, 2014</time><h1 class="post__title"><a href="/2014/11/23/设计模式之简单工厂模式/">设计模式之简单工厂模式</a></h1></header><div class="post__main"><p>首先来看<strong>简单工厂模式</strong>，简单工厂模式又称静态工厂方法模式,拿个例子说吧:</p>
+<!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="site-head"><div class="inner"><h1 class="site-title u-fl"><a href="/">蹦蹦的家</a></h1><nav class="site-nav u-fr"><ul class="site-nav__list"><li class="site-nav__item"><a href="/" class="site-nav__link">Home</a></li><li class="site-nav__item"><a href="/archives" class="site-nav__link">Archives</a></li></ul></nav></div></header><section class="site-content"><main class="site-main"><article class="post"><header class="post__head"><time datetime="2014-11-23T11:22:19.000Z" class="post__time">十一月 23, 2014</time><h1 class="post__title"><a href="/2014/11/23/设计模式之工厂方法模式/">设计模式之工厂方法模式</a></h1></header><div class="post__main"><p><strong>工厂方法模式</strong>去掉了简单工厂模式中工厂方法的静态属性，使得它可以被子类继承.</p>
+<p><em>直接看代码:</em><br><strong>简单工厂模式中的Factory改成AbstractFactory:</strong></p>
+<pre><code><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> AbstractFactory {
+   <span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title">produce</span>();
+}
+</code></pre><p><strong>生产汽车的CarFactory:</strong></p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CarFactory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span> </span>{
+    <span class="annotation">@Override</span>
+    <span class="keyword">public</span> Product <span class="title">produce</span>() {
+     <span class="keyword">return</span> <span class="keyword">new</span> Car();
+    }
+}
+</code></pre><p><strong>生产火箭的RocketFactory:</strong></p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RocketFactory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span> </span>{
+  <span class="annotation">@Override</span>
+   <span class="keyword">public</span> Product <span class="title">produce</span>() {
+     <span class="keyword">return</span> <span class="keyword">new</span> Rocket();
+   }
+}
+</code></pre><p><strong>生产飞机的AirplaneFactory:</strong></p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AirplaneFactory</span> <span class="keyword">extends</span> <span class="title">AbstractFactory</span> </span>{
+  <span class="annotation">@Override</span>
+   <span class="keyword">public</span> Product <span class="title">produce</span>() {
+     <span class="keyword">return</span> <span class="keyword">new</span> Airplane();
+   }
+}
+</code></pre><p><strong><em>惯例，来个测试类吧:</em></strong></p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> Test {
+ <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">main</span>(String [] args){
+    Product product = Factory.produce(<span class="string">"rocket"</span>);
+    product.show();
+  }
+}    
+</code></pre></div><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a href="/tags/设计模式/" class="post__tag__link">设计模式</a></li><li class="post__tag__item"><a href="/tags/工厂/" class="post__tag__link">工厂</a></li></ul><a href="/2014/11/23/设计模式之工厂方法模式/#comments" class="post__foot-link u-fr">评论</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-11-23T03:46:01.000Z" class="post__time">十一月 23, 2014</time><h1 class="post__title"><a href="/2014/11/23/设计模式之简单工厂模式/">设计模式之简单工厂模式</a></h1></header><div class="post__main"><p>首先来看<strong>简单工厂模式</strong>，简单工厂模式又称静态工厂方法模式,拿个例子说吧:</p>
 <p>军工厂制造各种装备，工厂（Factory）,生产装备(Product),包括飞机（Airplane）,火箭(Rocket),汽车(Car).</p>
 <p>直接看代码:<br><strong>装备(Product):</strong></p>
 <pre><code><span class="keyword">public</span> <span class="keyword">interface</span> Product {
