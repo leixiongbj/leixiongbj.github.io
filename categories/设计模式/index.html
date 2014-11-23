@@ -75,8 +75,9 @@
      car.show();
      airplane.show();
    }
-}    
-</code></pre></div><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a href="/tags/设计模式/" class="post__tag__link">设计模式</a></li><li class="post__tag__item"><a href="/tags/工厂/" class="post__tag__link">工厂</a></li></ul><a href="/2014/11/23/设计模式之抽象工厂模式/#comments" class="post__foot-link u-fr">评论</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-11-23T11:22:19.000Z" class="post__time">十一月 23, 2014</time><h1 class="post__title"><a href="/2014/11/23/设计模式之工厂方法模式/">设计模式之工厂方法模式</a></h1></header><div class="post__main"><p><strong>工厂方法模式</strong>去掉了简单工厂模式中工厂方法的静态属性，使得它可以被子类继承.</p>
+}
+</code></pre><p><strong><strong>总结</strong></strong><br><strong>抽象工厂模式与工厂方法模式的区别</strong><br>可以这么说，工厂方法模式是一种极端情况的抽象工厂模式，而抽象工厂模式可以看成是工厂方法模式的一种推广。<br>(1)、其实工厂方法模式是用来创建一个产品的等级结构的，而抽象工厂模式是用来创建多个产品的等级结构的。工厂方法创建一般只有一个方法，创建一种产品。抽象工厂一般有多个方法，创建一系列产品。<br>(2)、工厂方法模式只有一个抽象产品类，而抽象工厂模式有多个。工厂方法模式的具体工厂类只能创建一个具体产品类的实例，而抽象工厂模式可以创建多个。     </p>
+</div><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a href="/tags/设计模式/" class="post__tag__link">设计模式</a></li><li class="post__tag__item"><a href="/tags/工厂/" class="post__tag__link">工厂</a></li></ul><a href="/2014/11/23/设计模式之抽象工厂模式/#comments" class="post__foot-link u-fr">评论</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-11-23T11:22:19.000Z" class="post__time">十一月 23, 2014</time><h1 class="post__title"><a href="/2014/11/23/设计模式之工厂方法模式/">设计模式之工厂方法模式</a></h1></header><div class="post__main"><p><strong>工厂方法模式</strong>去掉了简单工厂模式中工厂方法的静态属性，使得它可以被子类继承.</p>
 <p><em>直接看代码:</em><br><strong>简单工厂模式中的Factory改成AbstractFactory:</strong></p>
 <pre><code><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> AbstractFactory {
    <span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title">produce</span>();
