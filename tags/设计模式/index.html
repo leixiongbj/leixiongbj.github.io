@@ -1,5 +1,82 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="alternative" href="/atom.xml" title="蹦蹦的家" type="application/atom+xml"><link rel="icon" href="/favicon.ico"><title>设计模式 - 蹦蹦的家</title><link rel="stylesheet" href="/css/style.css" type="text/css">
-<!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="site-head"><div class="inner"><h1 class="site-title u-fl"><a href="/">蹦蹦的家</a></h1><nav class="site-nav u-fr"><ul class="site-nav__list"><li class="site-nav__item"><a href="/" class="site-nav__link">Home</a></li><li class="site-nav__item"><a href="/archives" class="site-nav__link">Archives</a></li></ul></nav></div></header><section class="site-content"><main class="site-main"><article class="post"><header class="post__head"><time datetime="2014-11-23T11:22:19.000Z" class="post__time">十一月 23, 2014</time><h1 class="post__title"><a href="/2014/11/23/设计模式之工厂方法模式/">设计模式之工厂方法模式</a></h1></header><div class="post__main"><p><strong>工厂方法模式</strong>去掉了简单工厂模式中工厂方法的静态属性，使得它可以被子类继承.</p>
+<!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]--></head><body><header class="site-head"><div class="inner"><h1 class="site-title u-fl"><a href="/">蹦蹦的家</a></h1><nav class="site-nav u-fr"><ul class="site-nav__list"><li class="site-nav__item"><a href="/" class="site-nav__link">Home</a></li><li class="site-nav__item"><a href="/archives" class="site-nav__link">Archives</a></li></ul></nav></div></header><section class="site-content"><main class="site-main"><article class="post"><header class="post__head"><time datetime="2014-11-23T14:29:05.000Z" class="post__time">十一月 23, 2014</time><h1 class="post__title"><a href="/2014/11/23/设计模式之抽象工厂模式/">设计模式之抽象工厂模式</a></h1></header><div class="post__main"><p><strong>抽象工厂模式</strong>和<strong>工厂方法模式</strong>的区别就在于需要创建对象的复杂程度上。而且抽象工厂模式是三个里面最为抽象、最具一般性的.</p>
+<p><em>直接看代码:</em></p>
+<p><strong>汽车接口(ICar):</strong>    </p>
+<pre><code><span class="keyword">public</span> <span class="keyword">interface</span> ICar {
+  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>();
+}
+</code></pre><p><strong>具体汽车奔驰(BenzCar):</strong>    </p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BenzCar</span> <span class="keyword">implements</span> <span class="title">ICar</span> </span>{
+   <span class="annotation">@Override</span>
+   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>() {
+    System.out.print(<span class="string">"我是奔驰车"</span>);
+  }
+}
+</code></pre><p><strong>具体汽车宝马(BmwCar):</strong>    </p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BmwCar</span> <span class="keyword">implements</span> <span class="title">ICar</span> </span>{
+  <span class="annotation">@Override</span>
+  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>() {
+    System.out.print(<span class="string">"我是宝马车"</span>);
+  }
+}
+</code></pre><p><strong>飞机接口(ICar):</strong>    </p>
+<pre><code><span class="keyword">public</span> <span class="keyword">interface</span> IAirplane {
+  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>();
+}
+</code></pre><p><strong>具体飞机波音(BoeingAirplane):</strong>    </p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BoeingAirplane</span> <span class="keyword">implements</span> <span class="title">IAirplane</span> </span>{
+   <span class="annotation">@Override</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>() {
+      System.out.println(<span class="string">"我是波音飞机"</span>);
+    }
+}
+</code></pre><p><strong>具体飞机麦道(McdonneldAirplane):</strong>    </p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">McdonneldAirplane</span> <span class="keyword">implements</span> <span class="title">IAirplane</span> </span>{
+   <span class="annotation">@Override</span>
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span>() {
+      System.out.println(<span class="string">"我是麦道飞机"</span>);
+    }
+}    
+</code></pre><p><strong>抽象工厂方法（IFactory）:</strong>    </p>
+<pre><code><span class="keyword">public</span> <span class="keyword">interface</span> IFactory {
+   <span class="keyword">public</span> ICar <span class="title">create</span>();
+   <span class="keyword">public</span> IAirplane <span class="title">produce</span>();
+}
+</code></pre><p><strong>具体工厂方法(生产奔驰和波音的工厂)BenzAndBoeingFactory:</strong>    </p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BenzAndBoeingFactory</span> <span class="keyword">implements</span> <span class="title">IFactory</span> </span>{
+    <span class="annotation">@Override</span>
+    <span class="keyword">public</span> ICar <span class="title">create</span>() {
+      <span class="keyword">return</span> <span class="keyword">new</span> BenzCar();
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="keyword">public</span> IAirplane <span class="title">produce</span>() {
+      <span class="keyword">return</span> <span class="keyword">new</span> BoeingAirplane();
+    }
+}
+</code></pre><p><strong>具体工厂方法(生产宝马和麦道的工厂)BmwAndMcdonneldFactory:</strong>        </p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BmwAndMcdonneldFactory</span> <span class="keyword">implements</span> <span class="title">IFactory</span></span>{
+    <span class="annotation">@Override</span>
+    <span class="keyword">public</span> ICar <span class="title">create</span>() {
+       <span class="keyword">return</span> <span class="keyword">new</span> BmwCar();
+    }
+
+   <span class="annotation">@Override</span>
+   <span class="keyword">public</span> IAirplane <span class="title">produce</span>() {
+      <span class="keyword">return</span> <span class="keyword">new</span> McdonneldAirplane();
+    }
+}
+</code></pre><p><strong><em>测试类:</em></strong></p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> Test {
+   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span>  <span class="title">main</span>(String [] args){
+     IFactory factory = <span class="keyword">new</span> BenzAndBoeingFactory();
+     ICar car = factory.create();
+     IAirplane airplane = factory.produce();
+     car.show();
+     airplane.show();
+   }
+}    
+</code></pre></div><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a href="/tags/设计模式/" class="post__tag__link">设计模式</a></li><li class="post__tag__item"><a href="/tags/工厂/" class="post__tag__link">工厂</a></li></ul><a href="/2014/11/23/设计模式之抽象工厂模式/#comments" class="post__foot-link u-fr">评论</a></footer></article><article class="post"><header class="post__head"><time datetime="2014-11-23T11:22:19.000Z" class="post__time">十一月 23, 2014</time><h1 class="post__title"><a href="/2014/11/23/设计模式之工厂方法模式/">设计模式之工厂方法模式</a></h1></header><div class="post__main"><p><strong>工厂方法模式</strong>去掉了简单工厂模式中工厂方法的静态属性，使得它可以被子类继承.</p>
 <p><em>直接看代码:</em><br><strong>简单工厂模式中的Factory改成AbstractFactory:</strong></p>
 <pre><code><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> AbstractFactory {
    <span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title">produce</span>();
@@ -78,4 +155,4 @@
     product.show();
   }
 }
-</code></pre></div><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a href="/tags/设计模式/" class="post__tag__link">设计模式</a></li><li class="post__tag__item"><a href="/tags/工厂/" class="post__tag__link">工厂</a></li></ul><a href="/2014/11/23/设计模式之简单工厂模式/#comments" class="post__foot-link u-fr">评论</a></footer></article></main><aside class="site-aside"><div class="widget about"><div class="b"><div class="info u-cf"><img src="/aaaa.jpg"><div class="text"> <p>Your Name</p><p>More info</p><p>Job</p><p> <a href="http://weibo.com/u/2525528594" title="wiebo" class="weibo ico"></a><a href="https://github.com/leixiongbj" title="github" class="github ico"></a></p></div></div></div></div><div class="widget tags"><div class="h">categories</div><div class="b"> <ul><li><a href="/categories/设计模式/">设计模式</a><small>(2)</small></li></ul></div></div><div class="widget links"><div class="h">links</div><div class="b"> <ul><li><a href="http://www.baidu.com">百度</a></li></ul></div></div></aside></section><footer class="site-foot"><div class="inner"><div class="site-copy u-fl">© 2014 leixiong<bdi> ❤ Theme by <a href="http://riny.net" target="_blank">Bubblings</a> and <a href="http://unmric.com/" target="_blank">unmric</a></bdi></div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled">prev</span></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled">next</span></li></menu></div></footer></body></html>
+</code></pre></div><footer class="post__foot u-cf"><ul class="post__tag u-fl"><li class="post__tag__item"><a href="/tags/设计模式/" class="post__tag__link">设计模式</a></li><li class="post__tag__item"><a href="/tags/工厂/" class="post__tag__link">工厂</a></li></ul><a href="/2014/11/23/设计模式之简单工厂模式/#comments" class="post__foot-link u-fr">评论</a></footer></article></main><aside class="site-aside"><div class="widget about"><div class="b"><div class="info u-cf"><img src="/aaaa.jpg"><div class="text"> <p>Your Name</p><p>More info</p><p>Job</p><p> <a href="http://weibo.com/u/2525528594" title="wiebo" class="weibo ico"></a><a href="https://github.com/leixiongbj" title="github" class="github ico"></a></p></div></div></div></div><div class="widget tags"><div class="h">categories</div><div class="b"> <ul><li><a href="/categories/设计模式/">设计模式</a><small>(3)</small></li></ul></div></div><div class="widget links"><div class="h">links</div><div class="b"> <ul><li><a href="http://www.baidu.com">百度</a></li></ul></div></div></aside></section><footer class="site-foot"><div class="inner"><div class="site-copy u-fl">© 2014 leixiong<bdi> ❤ Theme by <a href="http://riny.net" target="_blank">Bubblings</a> and <a href="http://unmric.com/" target="_blank">unmric</a></bdi></div><menu class="page-menu u-fr"><li class="page-menu__item"><span title="Previous" class="page-menu__link icon-arrow-left page-menu__link--disabled">prev</span></li><li class="page-menu__item"><span title="Next" class="page-menu__link icon-arrow-right page-menu__link--disabled">next</span></li></menu></div></footer></body></html>
